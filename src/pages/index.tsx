@@ -11,8 +11,8 @@ export default function Home() {
     return (
         <>
             <Head>
-                <title>Phaser Nextjs Template</title>
-                <meta name="description" content="A Phaser 3 Next.js project template that demonstrates Next.js with React communication and uses Vite for bundling." />
+                <title>Exterminator - A Cat and Mouse Game</title>
+                <meta name="description" content="A Phaser 3 Next.js cat and mouse looping game made with the GMTK Game Jam 2025 in mind." />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.png" />
             </Head>

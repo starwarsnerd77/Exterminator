@@ -6,6 +6,7 @@ export class Game extends Scene
     camera: Phaser.Cameras.Scene2D.Camera;
     background: Phaser.GameObjects.Image;
     gameText: Phaser.GameObjects.Text;
+    platform: Phaser.Physics.Arcade.Image;
 
     constructor ()
     {
@@ -14,19 +15,27 @@ export class Game extends Scene
 
     create ()
     {
+        var width = this.game.config.width as number;
+        var height =this.game.config.height as number;
+
         this.camera = this.cameras.main;
-        this.camera.setBackgroundColor(0x00ff00);
 
-        this.background = this.add.image(512, 384, 'background');
-        this.background.setAlpha(0.5);
+        this.background = this.add.image(width/2, height/2, 'background');
+        this.background.setScale(2);
 
-        this.gameText = this.add.text(512, 384, 'Make something fun!\nand share it with us:\nsupport@phaser.io', {
-            fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',
-            stroke: '#000000', strokeThickness: 8,
-            align: 'center'
-        }).setOrigin(0.5).setDepth(100);
+        this.platform = this.physics.add.image(width/2, height*2.25, 'gameWheel');
+
+        this.platform.setImmovable(true);
+        this.platform.setVelocity(0, 0);
+        (this.platform.body as Phaser.Physics.Arcade.Body).allowGravity = false;
+        this.platform.setScale(1);
 
         EventBus.emit('current-scene-ready', this);
+    }
+
+    update ()
+    {
+        this.platform.rotation -= 0.001;
     }
 
     changeScene ()
